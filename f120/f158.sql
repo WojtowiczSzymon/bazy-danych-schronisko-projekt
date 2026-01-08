@@ -33,15 +33,15 @@ prompt APPLICATION 158 - schronisko
 -- Application Export:
 --   Application:     158
 --   Name:            schronisko
---   Date and Time:   14:18 Thursday January 8, 2026
+--   Date and Time:   14:26 Thursday January 8, 2026
 --   Exported By:     SZYMON.WOJTOWICZ@STUDENT.PUT.POZNAN.PL
 --   Flashback:       0
 --   Export Type:     Application Export
---     Pages:                     10
+--     Pages:                     11
 --       Items:                   48
 --       Processes:                5
---       Regions:                 20
---       Buttons:                 21
+--       Regions:                 23
+--       Buttons:                 22
 --       Dynamic Actions:         11
 --     Shared Components:
 --       Logic:
@@ -49,7 +49,7 @@ prompt APPLICATION 158 - schronisko
 --       Navigation:
 --         Lists:                  3
 --         Breadcrumbs:            1
---           Entries:              8
+--           Entries:              9
 --       Security:
 --         Authentication:         1
 --         Authorization:          1
@@ -111,7 +111,7 @@ wwv_imp_workspace.create_flow(
 ,p_substitution_value_01=>'schronisko'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_files_version=>6
-,p_version_scn=>837468415
+,p_version_scn=>837471158
 ,p_print_server_type=>'NATIVE'
 ,p_file_storage=>'DB'
 ,p_is_pwa=>'Y'
@@ -159,7 +159,7 @@ wwv_flow_imp_shared.create_list(
  p_id=>wwv_flow_imp.id(82886246212343517)
 ,p_name=>'Navigation Menu'
 ,p_list_status=>'PUBLIC'
-,p_version_scn=>837425120
+,p_version_scn=>837469688
 );
 wwv_flow_imp_shared.create_list_item(
  p_id=>wwv_flow_imp.id(82897952082343610)
@@ -235,6 +235,15 @@ wwv_flow_imp_shared.create_list_item(
 ,p_list_item_icon=>'fa-file-o'
 ,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
 ,p_list_item_current_for_pages=>'4'
+);
+wwv_flow_imp_shared.create_list_item(
+ p_id=>wwv_flow_imp.id(43728062127178993)
+,p_list_item_display_sequence=>90
+,p_list_item_link_text=>'adopcje'
+,p_list_item_link_target=>'f?p=&APP_ID.:9:&APP_SESSION.::&DEBUG.:::'
+,p_list_item_icon=>'fa-file-o'
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'9'
 );
 end;
 /
@@ -1018,6 +1027,12 @@ wwv_flow_imp_shared.create_menu_option(
 ,p_page_id=>8
 );
 wwv_flow_imp_shared.create_menu_option(
+ p_id=>wwv_flow_imp.id(43728984248178995)
+,p_short_name=>'adopcje'
+,p_link=>'f?p=&APP_ID.:9:&APP_SESSION.::&DEBUG.:::'
+,p_page_id=>9
+);
+wwv_flow_imp_shared.create_menu_option(
  p_id=>wwv_flow_imp.id(82886016024343514)
 ,p_short_name=>'Home'
 ,p_link=>'f?p=&APP_ID.:1:&APP_SESSION.::&DEBUG.:::'
@@ -1238,6 +1253,17 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_template_id=>4072362960822175091
 ,p_button_image_alt=>'schroniska, pokoje, zasoby'
 ,p_button_redirect_url=>'f?p=&APP_ID.:4:&SESSION.::&DEBUG.:::'
+,p_grid_new_row=>'Y'
+);
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(43700684474990730)
+,p_button_sequence=>40
+,p_button_name=>'adopcje'
+,p_button_action=>'REDIRECT_PAGE'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>4072362960822175091
+,p_button_image_alt=>'adopcje'
+,p_button_redirect_url=>'f?p=&APP_ID.:9:&SESSION.::&DEBUG.:::'
 ,p_grid_new_row=>'Y'
 );
 end;
@@ -4142,6 +4168,276 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_action=>'NATIVE_CLEAR'
 ,p_affected_elements_type=>'ITEM'
 ,p_affected_elements=>'P8_CHOROBA,P8_STATUS,P8_ID_ZWIERZ'
+);
+end;
+/
+prompt --application/pages/page_00009
+begin
+wwv_flow_imp_page.create_page(
+ p_id=>9
+,p_name=>'adopcje'
+,p_alias=>'ADOPCJE'
+,p_step_title=>'adopcje'
+,p_autocomplete_on_off=>'OFF'
+,p_page_template_options=>'#DEFAULT#'
+,p_protection_level=>'C'
+,p_page_component_map=>'18'
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(43699138721990715)
+,p_plug_name=>'adpocje'
+,p_region_template_options=>'#DEFAULT#:t-IRR-region--hideHeader js-addHiddenHeadingRoleDesc'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>2100526641005906379
+,p_plug_display_sequence=>10
+,p_query_type=>'SQL'
+,p_plug_source=>'SELECT ZWIERZETA.IMIE, ADOPCJE.* FROM ADOPCJE JOIN ZWIERZETA ON ZWIERZETA.ID_ZWIERZ = ADOPCJE.ID_ZWIERZ;'
+,p_plug_source_type=>'NATIVE_IR'
+,p_prn_content_disposition=>'ATTACHMENT'
+,p_prn_units=>'INCHES'
+,p_prn_paper_size=>'LETTER'
+,p_prn_width=>11
+,p_prn_height=>8.5
+,p_prn_orientation=>'HORIZONTAL'
+,p_prn_page_header_font_color=>'#000000'
+,p_prn_page_header_font_family=>'Helvetica'
+,p_prn_page_header_font_weight=>'normal'
+,p_prn_page_header_font_size=>'12'
+,p_prn_page_footer_font_color=>'#000000'
+,p_prn_page_footer_font_family=>'Helvetica'
+,p_prn_page_footer_font_weight=>'normal'
+,p_prn_page_footer_font_size=>'12'
+,p_prn_header_bg_color=>'#EEEEEE'
+,p_prn_header_font_color=>'#000000'
+,p_prn_header_font_family=>'Helvetica'
+,p_prn_header_font_weight=>'bold'
+,p_prn_header_font_size=>'10'
+,p_prn_body_bg_color=>'#FFFFFF'
+,p_prn_body_font_color=>'#000000'
+,p_prn_body_font_family=>'Helvetica'
+,p_prn_body_font_weight=>'normal'
+,p_prn_body_font_size=>'10'
+,p_prn_border_width=>.5
+,p_prn_page_header_alignment=>'CENTER'
+,p_prn_page_footer_alignment=>'CENTER'
+,p_prn_border_color=>'#666666'
+,p_plug_header=>'adopcje'
+);
+wwv_flow_imp_page.create_worksheet(
+ p_id=>wwv_flow_imp.id(43699251222990716)
+,p_max_row_count=>'1000000'
+,p_pagination_type=>'ROWS_X_TO_Y'
+,p_pagination_display_pos=>'BOTTOM_RIGHT'
+,p_report_list_mode=>'TABS'
+,p_lazy_loading=>false
+,p_show_detail_link=>'N'
+,p_show_notify=>'Y'
+,p_download_formats=>'CSV:HTML:XLSX:PDF'
+,p_enable_mail_download=>'Y'
+,p_owner=>'SZYMON.WOJTOWICZ@STUDENT.PUT.POZNAN.PL'
+,p_internal_uid=>43699251222990716
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(43699317209990717)
+,p_db_column_name=>'IMIE'
+,p_display_order=>10
+,p_column_identifier=>'A'
+,p_column_label=>'Imie'
+,p_column_type=>'STRING'
+,p_heading_alignment=>'LEFT'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(43699410144990718)
+,p_db_column_name=>'ID_ADOPCJI'
+,p_display_order=>20
+,p_column_identifier=>'B'
+,p_column_label=>'Id Adopcji'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(43699558726990719)
+,p_db_column_name=>'DATA'
+,p_display_order=>30
+,p_column_identifier=>'C'
+,p_column_label=>'Data'
+,p_column_type=>'DATE'
+,p_heading_alignment=>'LEFT'
+,p_tz_dependent=>'N'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(43699601221990720)
+,p_db_column_name=>'STATUS'
+,p_display_order=>40
+,p_column_identifier=>'D'
+,p_column_label=>'Status'
+,p_column_type=>'STRING'
+,p_heading_alignment=>'LEFT'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(43699752388990721)
+,p_db_column_name=>'PESEL'
+,p_display_order=>50
+,p_column_identifier=>'E'
+,p_column_label=>'Pesel'
+,p_column_type=>'STRING'
+,p_heading_alignment=>'LEFT'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(43699897980990722)
+,p_db_column_name=>'ID_ZWIERZ'
+,p_display_order=>60
+,p_column_identifier=>'F'
+,p_column_label=>'Id Zwierz'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_rpt(
+ p_id=>wwv_flow_imp.id(43734959886210965)
+,p_application_user=>'APXWS_DEFAULT'
+,p_report_seq=>10
+,p_report_alias=>'437350'
+,p_status=>'PUBLIC'
+,p_is_default=>'Y'
+,p_report_columns=>'IMIE:ID_ADOPCJI:DATA:STATUS:PESEL:ID_ZWIERZ'
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(43699928412990723)
+,p_plug_name=>'adoptujacy'
+,p_title=>unistr('adoptuj\0105cy')
+,p_region_template_options=>'#DEFAULT#:t-IRR-region--hideHeader js-addHiddenHeadingRoleDesc'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>2100526641005906379
+,p_plug_display_sequence=>20
+,p_query_type=>'TABLE'
+,p_query_table=>'ADOPTUJACY'
+,p_include_rowid_column=>false
+,p_plug_source_type=>'NATIVE_IR'
+,p_prn_content_disposition=>'ATTACHMENT'
+,p_prn_units=>'INCHES'
+,p_prn_paper_size=>'LETTER'
+,p_prn_width=>11
+,p_prn_height=>8.5
+,p_prn_orientation=>'HORIZONTAL'
+,p_prn_page_header=>unistr('adoptuj\0105cy')
+,p_prn_page_header_font_color=>'#000000'
+,p_prn_page_header_font_family=>'Helvetica'
+,p_prn_page_header_font_weight=>'normal'
+,p_prn_page_header_font_size=>'12'
+,p_prn_page_footer_font_color=>'#000000'
+,p_prn_page_footer_font_family=>'Helvetica'
+,p_prn_page_footer_font_weight=>'normal'
+,p_prn_page_footer_font_size=>'12'
+,p_prn_header_bg_color=>'#EEEEEE'
+,p_prn_header_font_color=>'#000000'
+,p_prn_header_font_family=>'Helvetica'
+,p_prn_header_font_weight=>'bold'
+,p_prn_header_font_size=>'10'
+,p_prn_body_bg_color=>'#FFFFFF'
+,p_prn_body_font_color=>'#000000'
+,p_prn_body_font_family=>'Helvetica'
+,p_prn_body_font_weight=>'normal'
+,p_prn_body_font_size=>'10'
+,p_prn_border_width=>.5
+,p_prn_page_header_alignment=>'CENTER'
+,p_prn_page_footer_alignment=>'CENTER'
+,p_prn_border_color=>'#666666'
+,p_plug_header=>unistr('adoptuj\0105cy')
+);
+wwv_flow_imp_page.create_worksheet(
+ p_id=>wwv_flow_imp.id(43700025200990724)
+,p_max_row_count=>'1000000'
+,p_pagination_type=>'ROWS_X_TO_Y'
+,p_pagination_display_pos=>'BOTTOM_RIGHT'
+,p_report_list_mode=>'TABS'
+,p_lazy_loading=>false
+,p_show_detail_link=>'N'
+,p_show_notify=>'Y'
+,p_download_formats=>'CSV:HTML:XLSX:PDF'
+,p_enable_mail_download=>'Y'
+,p_owner=>'SZYMON.WOJTOWICZ@STUDENT.PUT.POZNAN.PL'
+,p_internal_uid=>43700025200990724
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(43700132197990725)
+,p_db_column_name=>'PESEL'
+,p_display_order=>10
+,p_is_primary_key=>'Y'
+,p_column_identifier=>'A'
+,p_column_label=>'Pesel'
+,p_column_type=>'STRING'
+,p_heading_alignment=>'LEFT'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(43700268228990726)
+,p_db_column_name=>'IMIE'
+,p_display_order=>20
+,p_column_identifier=>'B'
+,p_column_label=>'Imie'
+,p_column_type=>'STRING'
+,p_heading_alignment=>'LEFT'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(43700352450990727)
+,p_db_column_name=>'NAZWISKO'
+,p_display_order=>30
+,p_column_identifier=>'C'
+,p_column_label=>'Nazwisko'
+,p_column_type=>'STRING'
+,p_heading_alignment=>'LEFT'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(43700481017990728)
+,p_db_column_name=>'DATA_UR'
+,p_display_order=>40
+,p_column_identifier=>'D'
+,p_column_label=>'Data Ur'
+,p_column_type=>'DATE'
+,p_heading_alignment=>'LEFT'
+,p_tz_dependent=>'N'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(43700507466990729)
+,p_db_column_name=>'TELEFON'
+,p_display_order=>50
+,p_column_identifier=>'E'
+,p_column_label=>'Telefon'
+,p_column_type=>'STRING'
+,p_heading_alignment=>'LEFT'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_rpt(
+ p_id=>wwv_flow_imp.id(43735482326210971)
+,p_application_user=>'APXWS_DEFAULT'
+,p_report_seq=>10
+,p_report_alias=>'437355'
+,p_status=>'PUBLIC'
+,p_is_default=>'Y'
+,p_report_columns=>'PESEL:IMIE:NAZWISKO:DATA_UR:TELEFON'
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(43728445332178994)
+,p_plug_name=>'Breadcrumb'
+,p_region_template_options=>'#DEFAULT#:t-BreadcrumbRegion--useBreadcrumbTitle'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>2531463326621247859
+,p_plug_display_sequence=>10
+,p_plug_display_point=>'REGION_POSITION_01'
+,p_menu_id=>wwv_flow_imp.id(82885812585343514)
+,p_plug_source_type=>'NATIVE_BREADCRUMB'
+,p_menu_template_id=>4072363345357175094
 );
 end;
 /
